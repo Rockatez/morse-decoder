@@ -35,11 +35,18 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '     ':  ' ',
 };
 
 function decode(expr) {
-    // write your solution here
-}
+    const splitToTen = expr.match(/.{1,2}/g)
+    const doubles = splitToTen.map((num) => num === "10" ? '.' : num === "11" ? "-" : num === "**" ? " " : "");
+     let arrFive = [];
+    for(let i=0; i < doubles.length; i=i+5){
+            arrFive.push(doubles.slice(i, i+5).join(''));
+    }
+    return arrFive.map(item=>MORSE_TABLE[item]).join('');
+    }
 
 module.exports = {
     decode
